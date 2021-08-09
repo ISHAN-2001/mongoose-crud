@@ -67,7 +67,7 @@ function displayall() {
 //displayall();
 
 function queryfind() {
-    Student.find({ name: 'Student no. 3' }, function (err, records) {
+    Student.find({ name: 'Student 3' }, function (err, records) {
         if (err) {
             console.log(err);
         }
@@ -82,7 +82,7 @@ function queryfind() {
 
 function findAndUpdate0() {
     
-    Student.findOne({ name: 'Lipun' }, (err, records) => {
+    Student.findOne({ name: 'Student3' }, (err, records) => {
         if (err) {
             console.log(err);
         }
@@ -102,7 +102,7 @@ function findAndUpdate0() {
 // findAndUpdate0();
 
 async function findAndUpdate() {
-    const s = await Student.findOne({ name: 'Sipun' });
+    const s = await Student.findOne({ name: 'Student2' });
     // console.log(s);
     s.address = 'New York';
     const s1 = await s.save();
