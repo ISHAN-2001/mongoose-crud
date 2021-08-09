@@ -35,7 +35,6 @@ function newStudent0() {
         }
     });
 }
-
 //newStudent0();
 
 async function newStudent() {
