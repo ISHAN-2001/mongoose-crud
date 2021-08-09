@@ -1,0 +1,14 @@
+{
+  "name": "mongoose-crud",
+  "version": "1.0.0",
+  "description": "Crud operations with mongoose",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "ishan",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.13.5"
+  }
+}
