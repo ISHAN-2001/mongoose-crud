@@ -80,6 +80,18 @@ app.get("/findId/:id", (req, res) => {
         });
 });
 
+app.get("/sort", (req, res) => {
+    
+    Student.find()
+        .sort({_id : -1})
+        .then((result) => {
+            res.send(result);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    
+})
 
 app.listen(3000, () => {
     console.log(`App listening at http://127.0.0.1:3000`)
