@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 const studentSchema = new Schema({
   name: {
-    type: String,
-    unique: true
+    type: String
   },
   age: Number,
   address : String

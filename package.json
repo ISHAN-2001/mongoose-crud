@@ -4,11 +4,12 @@
   "description": "Crud operations with mongoose",
   "main": "app.js",
   "scripts": {
-    "start": "node app"
+    "start": "nodemon app"
   },
   "author": "ishan",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "mongoose": "^5.13.5"
   }
 }

@@ -1,3 +1,5 @@
+const express = require("express")
+const app = express()
 // Setting up mongoose and mongodb
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/test1', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -18,106 +20,67 @@ const Student = require("./models/student");
 // CRUD operations :--
 
 //Creating a new student and saving it...
-function newStudent0() {
-    
-    const s = new Student({
-        name: "Student 1",
-        age: 13,
-        address: "BBSR"
-    });
+app.get("/create/:name1/:age/:address", (req, res) => {
 
-    s.save(function (error, document) {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            console.log(document);
-        }
-    });
-}
-//newStudent0();
-
-async function newStudent() {
-    const s = new Student({
-        name: "Student 1",
-        age: 13,
-        address: "BBSR"
-    });
-
-    const document = await s.save();
-    console.log(document);
-}
-// newStudent().catch(err => {
-//     console.log(err);
-// });
-// newStudent(); using async-await
+    let s = new Student({
+        name: req.params.name1,
+        age: req.params.age,
+        address: req.params.address
+    })
 
 
-function displayall() {
-    Student.find({}, function (err, records) {
-        if (err) {
-            console.log(err)
-        }
-        else {
-         console.log(records);
-        }
-    });
-}
-//displayall();
-
-function queryfind() {
-    Student.find({ name: 'Student 3' }, function (err, records) {
-        if (err) {
+    s.save()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
             console.log(err);
-        }
-        else {
-            console.log(records);
-        }
-    });
-}
+        });
+
+    res.send(req.params);
+});
+
+//displayall Student;
+app.get("/show-all", (req, res) => {
+   
+    Student.find()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
 //queryfind();
 // if no documents are there then value is null.
 // use findOne for single document or find for array of documents
-
-function findAndUpdate0() {
-    
-    Student.findOne({ name: 'Student3' }, (err, records) => {
-        if (err) {
+app.get("/find/:name1", (req, res) => {
+   
+    let name1 = req.params.name1;
+    Student.findOne({ name: name1 })
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
             console.log(err);
-        }
-        else {
-            records.address = 'tokyo';
-            records.save((err, documents) => {
-                if (err) {
-                    console.log(err);
-                }
-                else {
-                    console.log(documents);
-                }
-            })
-        }
-    });
-}
-// findAndUpdate0();
+        });
+    
+});
 
-async function findAndUpdate() {
-    const s = await Student.findOne({ name: 'Student2' });
-    // console.log(s);
-    s.address = 'New York';
-    const s1 = await s.save();
-    // console.log(s1);
-}
-// findAndUpdate().catch(error => {
-//     console.log(error);
-// })
-// findAndUpdate();  // using async-await
+app.get("/findId/:id", (req, res) => {
+
+    let id = req.params.id;
+    Student.findById(id)
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
 
 
-async function findAndRemove() {
-    let s = await Student.findOne({ name: 'Student no. 1' });
-    let deleted = await Student.deleteOne(s);
-}
-// findAndRemove().catch(err => {
-//     console.log(err);
-// });
-// findAndRemove();  // using async-await
+app.listen(3000, () => {
+    console.log(`App listening at http://127.0.0.1:3000`)
+})
